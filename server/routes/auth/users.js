@@ -1,27 +1,7 @@
 const router = require("express").Router();
 
-const { isInObject } = require("../../helpers");
-const { Users } = require("../../models/users");
-
-router.get("/", async (req, res) => {
-  try {
-    let data = await Users.find();
-    if (!data)
-      return res.status(404).json({
-        message: "User Not Found"
-      });
-
-    const newData = data.map(d => {
-      const temp = { ...d._doc };
-      delete temp.password;
-      return temp;
-    });
-    res.status(200).json({
-      message: "Successfully Updated",
-      newData
-    });
-  } catch (error) {}
-});
+const GET = require("./GET");
+router.use("/", GET);
 
 router.get("/:id", async (req, res) => {
   let { id } = req.params;
