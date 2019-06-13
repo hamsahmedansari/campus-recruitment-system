@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const bcrypt = require("bcrypt");
 
 const { Users } = require("../../models/users");
 const { isInObject } = require("../../helpers");
@@ -14,11 +15,11 @@ router.post("/", async (req, res) => {
     if (typeof validate === "string") {
       throw `Please Add ${validate}`;
     }
-
+    const password = await bcrypt.hashSync(req.body.password, 10);
     let obj = new Users({
       userName: req.body.userName,
       email: req.body.email,
-      password: req.body.password,
+      password: password,
       accountType: req.body.accountType
     });
     let data = await obj.save();

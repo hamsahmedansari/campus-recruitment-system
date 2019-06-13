@@ -1,7 +1,7 @@
 const router = require("express").Router();
 // Api Students
 const student = require("./student");
-const auth = require("./auth");
+const users = require("./users");
 const company = require("./company");
 
 router.get("/", (req, res) => {
@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.use("/auth", auth);
+router.use("/users", users);
 router.use("/student", student);
 router.use("/company", company);
 module.exports = router;
