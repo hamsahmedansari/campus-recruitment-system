@@ -2,7 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
 const { Users } = require("../../models/users");
-const { isInObject } = require("../../helpers");
+const { isInObject, Decrypt } = require("../../helpers");
 
 router.post("/", async (req, res) => {
   try {
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
     if (typeof validate === "string") {
       throw `Please Add ${validate}`;
     }
-    const password = await bcrypt.hashSync(req.body.password, 10);
+    const password = await Decrypt(req.body.password);
     let obj = new Users({
       userName: req.body.userName,
       email: req.body.email,
