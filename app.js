@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+//
+require("./server/config/connect");
 
 const api = require("./server/routes");
 
