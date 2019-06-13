@@ -7,4 +7,11 @@ router.get("/", (req, res) => {
   });
 });
 
+router.post("/", (req, res) => {
+  res.status(200).json({
+    message: "Successfully Created",
+    data: req.body
+  });
+});
+
 module.exports = router;
