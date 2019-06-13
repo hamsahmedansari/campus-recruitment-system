@@ -36,4 +36,26 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  let { id } = req.params;
+  try {
+    let data = await Users.findById(id);
+    if (!data)
+      return res.status(404).json({
+        message: "User Not Found"
+      });
+
+    res.status(200).json({
+      message: "Successfully Updated",
+      data
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(200).json({
+      message: "Got Some Error",
+      data: error
+    });
+  }
+});
 module.exports = router;
